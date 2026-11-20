@@ -94,7 +94,7 @@ const SHOTS = [
       await open(${JSON.stringify(PAGES.crop)});
       hideSB();
       const w = await center(wrapAt(0)); const img = w.querySelector("img");
-      const p = app.plugins.plugins["live-image-editor"]; p.activeImage = img; p.crop();
+      const p = app.plugins.plugins["live-image-editor-peng"]; p.activeImage = img; p.crop();
       await sleep(750);
       return JSON.stringify({ clip: rectEl(wrapAt(0) || w, 72) });
     })()` },
@@ -104,7 +104,7 @@ const SHOTS = [
       hideSB();
       const w = wrapAt(0); w.scrollIntoView({block:"start"}); await sleep(550);
       const img = w.querySelector("img");
-      const p = app.plugins.plugins["live-image-editor"]; p.activeImage = img; p.toggleFilters();
+      const p = app.plugins.plugins["live-image-editor-peng"]; p.activeImage = img; p.toggleFilters();
       await sleep(750);
       const a = w.getBoundingClientRect(); const panel = document.querySelector(".lie-filter-panel");
       const b = panel ? panel.getBoundingClientRect() : a;
@@ -163,7 +163,7 @@ for (const shot of SHOTS) {
     console.log(`saved ${file}${clip ? ` (${Math.round(clip.width)}x${Math.round(clip.height)})` : ""}`);
     ok++;
     // reset transient UI (close any open panel/crop) before the next shot
-    await evalJson(`(()=>{ const p=app.plugins.plugins["live-image-editor"]; try{p.closeFilterPanel&&p.closeFilterPanel(false);}catch(e){} try{p.closeCrop&&p.closeCrop(false);}catch(e){} try{p.closeSubmenu&&p.closeSubmenu(false);}catch(e){} return 1; })()`);
+    await evalJson(`(()=>{ const p=app.plugins.plugins["live-image-editor-peng"]; try{p.closeFilterPanel&&p.closeFilterPanel(false);}catch(e){} try{p.closeCrop&&p.closeCrop(false);}catch(e){} try{p.closeSubmenu&&p.closeSubmenu(false);}catch(e){} return 1; })()`);
     await sleep(300);
   } catch (e) { console.error(`FAIL ${shot.name}: ${e.message}`); }
 }

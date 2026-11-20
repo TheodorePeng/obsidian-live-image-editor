@@ -29,7 +29,7 @@ const EVAL_RUN = `(async () => {
   const onErr = (e) => errs.push("UNCAUGHT " + (e.error && e.error.stack || e.message));
   window.addEventListener("error", onErr);
   try {
-    const plugin = app.plugins.plugins["live-image-editor"];
+    const plugin = app.plugins.plugins["live-image-editor-peng"];
     if (!plugin) { out.fatal = "plugin not loaded"; window.__TD = JSON.stringify(out); return; }
     const vault = app.vault;
     const PATH = "_td-fixture.md";

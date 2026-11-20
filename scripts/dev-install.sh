@@ -15,7 +15,7 @@ for arg in "$@"; do
 done
 
 : "${VAULT_PATH:?Usage: $0 <vault-path> [--dev]}"
-VAULT_PLUGIN_DIR="$VAULT_PATH/.obsidian/plugins/live-image-editor"
+VAULT_PLUGIN_DIR="$VAULT_PATH/.obsidian/plugins/live-image-editor-peng"
 SCRIPT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 
 if [ "$DEV" -eq 1 ]; then

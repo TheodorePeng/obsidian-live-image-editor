@@ -9,7 +9,7 @@ import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-const PLUGIN_ID = "live-image-editor";
+const PLUGIN_ID = "live-image-editor-peng";
 const GUARD_FIXTURE = "_toolbar-hosts-fixture.md";
 const SOURCE_ADDRESS_FIXTURE = "_postprocessor-write-address-fixture.md";
 const SOURCE_ADDRESS_DIRS = ["_postprocessor-write-address-a", "_postprocessor-write-address-b"];

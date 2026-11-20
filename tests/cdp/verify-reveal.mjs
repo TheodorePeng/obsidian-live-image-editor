@@ -23,7 +23,7 @@ const env = {
 const EVAL_RUN = `(async () => {
   window.__REV = "";
   try {
-    const plugin = app.plugins.plugins["live-image-editor"];
+    const plugin = app.plugins.plugins["live-image-editor-peng"];
     if (!plugin) { window.__REV = JSON.stringify({ fatal: "plugin not loaded" }); return; }
     const vault = app.vault;
     const PATH = "_reveal-fixture.md";

@@ -19,7 +19,7 @@ const handleSigterm = () => requestAbort("SIGTERM");
 process.on("SIGINT", handleSigint);
 process.on("SIGTERM", handleSigterm);
 
-const PLUGIN_ID = "live-image-editor";
+const PLUGIN_ID = "live-image-editor-peng";
 const FIXTURE = "_toolbar-hosts-fixture.md";
 const OPTICAL_LOCK_ID = "__lie-toolbar-host-optical-lock";
 const VIEWPORT = { width: 1280, height: 900, deviceScaleFactor: 1 };
@@ -918,9 +918,9 @@ async function main() {
         theme: [...document.body.classList].filter((name) => name.startsWith("theme-")).sort(),
         viewport: { width: innerWidth, height: innerHeight, dpr: devicePixelRatio },
         hashes: {
-          main: await hash(".obsidian/plugins/live-image-editor/main.js"),
-          manifest: await hash(".obsidian/plugins/live-image-editor/manifest.json"),
-          styles: await hash(".obsidian/plugins/live-image-editor/styles.css"),
+          main: await hash(".obsidian/plugins/live-image-editor-peng/main.js"),
+          manifest: await hash(".obsidian/plugins/live-image-editor-peng/manifest.json"),
+          styles: await hash(".obsidian/plugins/live-image-editor-peng/styles.css"),
         },
         target: ${JSON.stringify(cdp.targetInfo)},
       };

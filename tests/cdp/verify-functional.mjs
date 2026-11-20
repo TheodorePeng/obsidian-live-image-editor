@@ -16,7 +16,7 @@ const FIXTURE = "_functional-fixture.md";
 
 // Locate the line-3 image + editor; shared prelude for every op eval.
 const PRELUDE = `
-  const plugin = app.plugins.plugins["live-image-editor"];
+  const plugin = app.plugins.plugins["live-image-editor-peng"];
   const ed = app.workspace.activeEditor && app.workspace.activeEditor.editor;
   const cm = ed && ed.cm;
   // re-locate every time: a commit re-renders the line, replacing the old img node (stale = width 0).
@@ -27,7 +27,7 @@ const PRELUDE = `
   plugin.activeImage = img;`;
 
 const SETUP = `(async () => {
-  const plugin = app.plugins.plugins["live-image-editor"];
+  const plugin = app.plugins.plugins["live-image-editor-peng"];
   if (!plugin) return { fatal: "plugin not loaded" };
   const vault = app.vault;
   const L = ["# functional fixture", "", "![](images/sample-landscape.png){width=300}", "", "tail", ""].join("\\n");
@@ -99,7 +99,7 @@ async function main() {
   } finally {
     if (setupDone) {
       await cdp.evaluate(`(async () => {
-        try { const p = app.plugins.plugins["live-image-editor"]; if (p && p.submenu) p.closeSubmenu(false); } catch (e) {}
+        try { const p = app.plugins.plugins["live-image-editor-peng"]; if (p && p.submenu) p.closeSubmenu(false); } catch (e) {}
         try { const f = app.vault.getAbstractFileByPath(${JSON.stringify(FIXTURE)}); if (f) await app.vault.delete(f); } catch (e) {}
       })()`).catch(() => {});
     }

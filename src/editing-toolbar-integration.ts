@@ -17,7 +17,7 @@ import { LAYOUT_ICON_ID } from "./layout-icons";
 // `reset-all-images` shows up); the programmatic injection here is the only way they appear.
 // Everything is feature-detected and defensive: if the other plugin's shape differs, we no-op.
 
-const PLUGIN_ID = "live-image-editor";
+const PLUGIN_ID = "live-image-editor-peng";
 export const EDITING_TOOLBAR_ID = "editing-toolbar";
 
 // Versions of editing-toolbar this integration has been validated against (the v4 submenu schema —
@@ -27,7 +27,7 @@ const TESTED_VERSIONS = ["3.0.0", "3.0.1", "3.1.0", "3.1.1", "4.0.8"];
 // The full image toolbar, as the submenu's child commands (id → icon + localized name), mirroring the
 // in-image toolbar order. The row is wide, but since we slot it at the LEFT edge (see below) it always
 // renders in full; on a very full bar it's the user's own far-right commands that shift into editing-
-// toolbar's overflow — their call. Each id resolves to a `live-image-editor:<id>` registered command.
+// toolbar's overflow — their call. Each id resolves to a `live-image-editor-peng:<id>` registered command.
 const SUBMENU_ID = `SubmenuCommands-${PLUGIN_ID}`;
 // Fixed brand label (intentionally NOT localized) so our submenu is unmistakably "ours" in editing-
 // toolbar's bar and its menu-structure editor — same spirit as our prefixed CSS classes.
@@ -114,7 +114,7 @@ export function getEditingToolbarStatus(app: App): EditingToolbarStatus {
 }
 
 // Drop any prior trace of ours — the new submenu and any legacy top-level buttons (older versions
-// pushed individual `live-image-editor:<id>` entries) — so add/remove is idempotent.
+// pushed individual `live-image-editor-peng:<id>` entries) — so add/remove is idempotent.
 function stripOurEntries(list: MenuCommand[]): void {
   for (let i = list.length - 1; i >= 0; i--) {
     const id = String(list[i]?.id ?? "");

@@ -22,7 +22,7 @@ const FIXTURE = "_optical-render-fixture.md";
 // Build the fixture, open in LP, enable captions, then measure every image box + the caption + the
 // editor content box in ONE pass (rects in viewport CSS px). Returns a record keyed per scenario.
 const MEASURE = `(async () => {
-  const plugin = app.plugins.plugins["live-image-editor"];
+  const plugin = app.plugins.plugins["live-image-editor-peng"];
   if (!plugin) return { fatal: "plugin not loaded" };
   const vault = app.vault;
   const L = [
@@ -192,7 +192,7 @@ async function main() {
   } finally {
     if (setupDone) {
       await cdp.evaluate(`(async () => {
-        try { const p = app.plugins.plugins["live-image-editor"]; if (p) p.settings.showCaptions = false; } catch (e) {}
+        try { const p = app.plugins.plugins["live-image-editor-peng"]; if (p) p.settings.showCaptions = false; } catch (e) {}
         try { const f = app.vault.getAbstractFileByPath(${JSON.stringify(FIXTURE)}); if (f) await app.vault.delete(f); } catch (e) {}
       })()`).catch(() => {});
     }

@@ -1,10 +1,10 @@
 {
-	"id": "live-image-editor",
-	"name": "Live Image Editor",
+	"id": "live-image-editor-peng",
+	"name": "Live Image Editor Peng",
 	"minAppVersion": "1.12.7",
 	"description": "Edit images non-destructively: crop, rotate, flip, resize, and apply CSS filters live, without modifying the original file.",
-	"author": "britz",
-	"authorUrl": "https://github.com/Britz",
+	"author": "TheodorePeng",
+	"authorUrl": "https://github.com/TheodorePeng",
 	"isDesktopOnly": false,
 	"version": "0.6.17"
 }

@@ -1,5 +1,24 @@
 # Agent Working Rules
 
+## Fork overrides (Peng fork) — read before anything else
+
+This repository is a personal fork; [`FORK.md`](FORK.md) is the authoritative description of it.
+The following **override** conflicting instructions elsewhere in this repo (`CLAUDE.md` in particular):
+
+1. **Language** — converse in Chinese (or English), not German. `CLAUDE.md`'s German rule targets
+   upstream's maintainer and does not apply here.
+2. **Host builds are allowed.** `npm ci` / `npm run build` / `npm test` / `npm run lint*` run natively
+   on macOS with Node 22. No Dev Container, no Docker, no Podman. Do not install a container runtime.
+3. **Committing is allowed**, with the user's explicit approval for that specific commit. Never push to
+   `upstream`, never open a PR against the upstream repository, never force-push.
+4. **Identity vs. behaviour.** Renaming the plugin identity (`manifest.json` `id`/`name`/`author`,
+   `package.json` `name`) is *configuration*, not a behavioural change, and does not require the
+   `implementation-plan.md` ritual. Any actual behaviour change still follows the top-down gate below.
+5. **Branch discipline** — never commit to `main` (it mirrors `upstream/main`). Work lands on
+   `personal`.
+
+Everything below this block still applies unless it contradicts the five points above.
+
 ## Communication
 
 - Always be brief, factual, and direct. Avoid essays, repeated explanations, and narrative status

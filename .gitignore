@@ -16,6 +16,10 @@ vault-image-toolbar/.obsidian/plugins/live-image-editor/data.json
 # regenerated build artifact (npm run build / dev:vault writes it) — like main.js, don't track
 vault-image-toolbar/.obsidian/plugins/live-image-editor/styles.css
 
+# Peng fork: the isolated test vault (copy of vault-image-toolbar/ under the renamed plugin id).
+# Wholly local — never tracked, so it can hold scratch notes and per-machine state freely.
+vault-peng/
+
 # MkDocs site build (docs/ -> GitHub Pages)
 /site/
 .venv-docs/

@@ -65,7 +65,7 @@ atexit.register(_clean)
 # `[main.ts](src/main.ts#L141)` (the CLAUDE.md code-reference convention). Those files are not
 # part of the site, so they would 404. Rewrite any such link whose target is a real repo file
 # OUTSIDE docs/ to its GitHub URL; line anchors (#L141, #L33-L38) already match GitHub's.
-_GH = "https://github.com/Britz/obsidian-live-image-editor/"
+_GH = "https://github.com/TheodorePeng/obsidian-live-image-editor-peng/"
 _LINK_RE = re.compile(r"\]\((?P<t>[^)\s]+)\)")
 _SKIP_RE = re.compile(r"^(?:[a-z][a-z0-9+.-]*:|//|/|#)")
 

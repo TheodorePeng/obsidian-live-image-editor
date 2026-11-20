@@ -30,7 +30,7 @@ const EVAL_RUN = `(async () => {
   const R = {};
   const ok = (k, v) => { R[k] = v; };
   try {
-    const plugin = app.plugins.plugins["live-image-editor"];
+    const plugin = app.plugins.plugins["live-image-editor-peng"];
     if (!plugin) { window.__SUBICONS = JSON.stringify({ fatal: "plugin not loaded" }); return; }
     const vault = app.vault;
     const PATH = "_submodal-icons-fixture.md";

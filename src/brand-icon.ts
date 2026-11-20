@@ -2,7 +2,7 @@
 // plateau) inside Lucide-weight corner brackets. Registered via `addIcon` in onload so it is usable
 // anywhere `setIcon` is (the editing-toolbar submenu, the settings header, …). The same artwork
 // ships as `docs/img/logo.svg` for the README / docs / GitHub-Pages favicon — keep the two in sync.
-export const BRAND_ICON_ID = "live-image-editor";
+export const BRAND_ICON_ID = "live-image-editor-peng";
 
 // Content for Obsidian's `addIcon`, which wraps it in `<svg viewBox="0 0 100 100">` — so the 24-grid
 // artwork is scaled by 100/24. Photo = ONE `evenodd` fill path (rounded frame with the funke + the

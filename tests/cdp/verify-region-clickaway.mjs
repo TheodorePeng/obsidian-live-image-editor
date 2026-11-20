@@ -29,7 +29,7 @@ const EVAL_RUN = `(async () => {
   const R = {};
   const ok = (k, v) => { R[k] = v; };
   try {
-    const plugin = app.plugins.plugins["live-image-editor"];
+    const plugin = app.plugins.plugins["live-image-editor-peng"];
     if (!plugin) { window.__CLICKAWAY = JSON.stringify({ fatal: "plugin not loaded" }); return; }
     // Reset any panel/crop left open by a prior partial run, so consecutive runs start clean.
     try { plugin.closeFilterPanel(false); } catch (e) { /* none open */ }
