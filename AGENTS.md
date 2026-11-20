@@ -11,9 +11,10 @@ The following **override** conflicting instructions elsewhere in this repo (`CLA
    on macOS with Node 22. No Dev Container, no Docker, no Podman. Do not install a container runtime.
 3. **Committing is allowed**, with the user's explicit approval for that specific commit. Never push to
    `upstream`, never open a PR against the upstream repository, never force-push.
-4. **Identity vs. behaviour.** Renaming the plugin identity (`manifest.json` `id`/`name`/`author`,
-   `package.json` `name`) is *configuration*, not a behavioural change, and does not require the
-   `implementation-plan.md` ritual. Any actual behaviour change still follows the top-down gate below.
+4. **Identity is frozen to upstream.** The plugin name, id (`live-image-editor`), author credit and
+   package name match upstream exactly, on purpose, so this build stays a drop-in replacement. Do not
+   "personalise" them; changing the id would also break coexistence with the upstream plugin. Fork
+   notes belong in `FORK.md` / `docs/fork/`, never as identity changes.
 5. **Branch discipline** — never commit to `main` (it mirrors `upstream/main`). Work lands on
    `personal`.
 

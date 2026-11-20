@@ -28,7 +28,7 @@ const rec = (name, expect, got) => results.push({ name, expect, shown: got.shown
 const cdp = await connectOptical();
 try {
   await cdp.focusEmulation(true);
-  const loaded = await cdp.evaluate('!!app.plugins.plugins["live-image-editor-peng"] && !!app.workspace.activeLeaf');
+  const loaded = await cdp.evaluate('!!app.plugins.plugins["live-image-editor"] && !!app.workspace.activeLeaf');
   if (!loaded) { console.log("FATAL: plugin not loaded / no active leaf"); cdp.close(); process.exit(2); }
 
   const rectOf = (sel) => cdp.evaluate(`(() => { const e = document.querySelector(${JSON.stringify(sel)}); if (!e) return null; const r = e.getBoundingClientRect(); return r.width < 2 || r.height < 2 ? null : { x: r.x, y: r.y, width: Math.min(r.width, 500), height: Math.min(r.height, 200) }; })()`);
@@ -45,13 +45,13 @@ try {
 
   const setup = async (content) => { await cdp.evaluate(`(async () => { const v = app.vault; let f = v.getAbstractFileByPath("_reveal-matrix.md"); const c = ${JSON.stringify(content)}; if (f) await v.modify(f, c); else f = await v.create("_reveal-matrix.md", c); window.__rmf = f.path; await app.workspace.getLeaf(false).openFile(f); })()`); await wait(1100); };
   const teardown = () => cdp.evaluate('(async () => { const f = app.vault.getAbstractFileByPath(window.__rmf); if (f) await app.vault.delete(f); })()');
-  const mode = async (m) => { await cdp.evaluate(`(() => { const p = app.plugins.plugins["live-image-editor-peng"]; p.settings.defaultRevealState = ${JSON.stringify(m)}; p.refreshLivePreviewDecorations && p.refreshLivePreviewDecorations(); })()`); await wait(300); };
+  const mode = async (m) => { await cdp.evaluate(`(() => { const p = app.plugins.plugins["live-image-editor"]; p.settings.defaultRevealState = ${JSON.stringify(m)}; p.refreshLivePreviewDecorations && p.refreshLivePreviewDecorations(); })()`); await wait(300); };
   const cur = async (o) => { await cdp.evaluate(`(() => { const cm = app.workspace.activeEditor.editor.cm; cm.dispatch({ selection: { anchor: ${o} } }); cm.focus(); })()`); await wait(260); };
   const dismiss = async () => { await cdp.evaluate('(() => { const b = document.querySelector(".lie-toolbar-reveal"); if (b) b.click(); })()'); await wait(260); };
   const hoverImg = async (sel) => { const r = await rectOf(sel); if (r) await cdp.hover(r.x + r.width / 2, r.y + r.height / 2); await wait(340); };
   // ENGAGED pin (AD12): there is no easy way to drive a real crop over CDP, so stub an "open surface" for
   // the image — `engagedImagePos()` reads `anySurfaceOpen()` + `activeImage`, exactly the live inputs.
-  const engaged = async (on) => { await cdp.evaluate(`(() => { const p = app.plugins.plugins["live-image-editor-peng"]; if (${on}) { p.activeImage = document.querySelector(".markdown-source-view .lie-wrapper img"); p.filterPanel = {}; } else { p.filterPanel = null; p.activeImage = null; } p.refreshLivePreviewDecorations(); })()`); await wait(300); };
+  const engaged = async (on) => { await cdp.evaluate(`(() => { const p = app.plugins.plugins["live-image-editor"]; if (${on}) { p.activeImage = document.querySelector(".markdown-source-view .lie-wrapper img"); p.filterPanel = {}; } else { p.filterPanel = null; p.activeImage = null; } p.refreshLivePreviewDecorations(); })()`); await wait(300); };
 
   // ===== STANDALONE {…} =====
   await setup("# T\n\n![](images/sample-portrait.png){width=200}\n");

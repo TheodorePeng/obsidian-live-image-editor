@@ -1,7 +1,8 @@
 # Baseline — measured at fork initialization
 
-Recorded **before and after** the identity rename, so that any later failure can be classified as an
-environment problem, a rename problem, or a pre-existing upstream problem. Do not edit these numbers;
+Recorded at fork initialization, and re-confirmed after the identity decision was settled (the fork
+keeps upstream's plugin identity — see `FORK.md` §1). Any later failure can therefore be classified as
+an environment problem or a pre-existing upstream problem. Do not edit these numbers;
 append a new dated section when the toolchain or the baseline legitimately changes.
 
 ## Environment
@@ -33,15 +34,15 @@ same correction the next time it installs. The fork keeps the correction.
 
 ## Gate results
 
-Identical before and after the rename — the rename changed no behaviour.
+Identical across every run to date.
 
-| Command | Result (baseline) | Result (after rename) |
-|---|---|---|
-| `npm run build` (`tsc -noEmit` + esbuild production) | PASS, exit 0 | PASS, exit 0 |
-| `npm test` (`vitest run`) | **21 files / 403 tests passed**, 2.74 s | **21 files / 403 tests passed**, 2.86 s |
-| `npm run lint` (`eslint src/`) | 0 problems | 0 problems |
-| `npm run lint:obsidian` | 0 errors, **18 warnings** | 0 errors, 18 warnings |
-| `npm run lint:css` | 0 errors, **18 warnings** | 0 errors, 18 warnings |
+| Command | Result |
+|---|---|
+| `npm run build` (`tsc -noEmit` + esbuild production) | PASS, exit 0 |
+| `npm test` (`vitest run`) | **21 files / 403 tests passed**, ~2.8 s |
+| `npm run lint` (`eslint src/`) | 0 problems |
+| `npm run lint:obsidian` | 0 errors, **18 warnings** |
+| `npm run lint:css` | 0 errors, **18 warnings** |
 
 ### `lint:obsidian` warning breakdown (18)
 
@@ -58,8 +59,8 @@ the number to hold, not 11.
 - `dist/lie-runtime.js` was **not modified** by a rebuild on the clean tree — the committed artifact is
   reproducible. Keep it that way: if a build dirties `dist/`, that is a finding worth reporting, not
   something to commit silently.
-- After the rename, the production bundle contains `live-image-editor-peng` and **zero** occurrences of
-  the old id token (verified by `grep`).
+- The production bundle contains the upstream id `live-image-editor`, matching `manifest.json`. If a
+  build ever emits a different id, identity has drifted — see `FORK.md` §1.
 
 ## Test layers
 
@@ -78,9 +79,11 @@ and the user's running instance must not be restarted. Treat it as unverified.
 ## Test vault
 
 `vault-peng/` — a copy of upstream's `vault-image-toolbar/` with the plugin folder excluded, wholly
-gitignored. Plugin installed at `vault-peng/.obsidian/plugins/live-image-editor-peng/`
-(`main.js`, `manifest.json`, `styles.css`), `manifest.json` id verified as `live-image-editor-peng`.
-No `plugins/live-image-editor/` directory exists there, so the upstream plugin cannot be shadowed.
+gitignored. Plugin installed at `vault-peng/.obsidian/plugins/live-image-editor/`
+(`main.js`, `manifest.json`, `styles.css`), `manifest.json` id verified as `live-image-editor`.
+
+This vault holds **only** the fork's build. Since the fork shares upstream's plugin id, never point
+this vault at an upstream install as well — see `FORK.md` §1 for why they are mutually exclusive.
 
 **GUI verification status: pending user confirmation.** The plugin has been installed and its manifest
 verified on disk, but it has not been observed loading inside Obsidian, and no crop has been performed.

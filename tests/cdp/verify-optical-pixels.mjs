@@ -18,7 +18,7 @@ import { connectOptical, pixel } from "./_optical.mjs";
 const FIXTURE = "_optical-pixels-fixture.md";
 
 const MEASURE = `(async () => {
-  const plugin = app.plugins.plugins["live-image-editor-peng"];
+  const plugin = app.plugins.plugins["live-image-editor"];
   if (!plugin) return { fatal: "plugin not loaded" };
   const vault = app.vault;
   const L = [

@@ -26,7 +26,7 @@ function accentFraction(img, accent, tol = 100) {
 const FIXTURE = "_optical-chrome-fixture.md";
 
 const SETUP = `(async () => {
-  const plugin = app.plugins.plugins["live-image-editor-peng"];
+  const plugin = app.plugins.plugins["live-image-editor"];
   if (!plugin) return { fatal: "plugin not loaded" };
   const vault = app.vault;
   const L = [
@@ -97,7 +97,7 @@ async function main() {
 
     // (3)(4) open the filter panel → it docks beside the image, toolbar greyed (inactive)
     const filt = await cdp.evaluate(`(async () => {
-      const plugin = app.plugins.plugins["live-image-editor-peng"];
+      const plugin = app.plugins.plugins["live-image-editor"];
       const wrap = window.__chromeBig; const img = wrap.querySelector("img");
       plugin.activeImage = img;
       plugin.toggleFilters();
@@ -117,7 +117,7 @@ async function main() {
 
     // (5) crop → all 8 handles + rotate knob are hit-testable at their centres
     const crop = await cdp.evaluate(`(async () => {
-      const plugin = app.plugins.plugins["live-image-editor-peng"];
+      const plugin = app.plugins.plugins["live-image-editor"];
       const wrap = window.__chromeBig; const img = wrap.querySelector("img");
       plugin.activeImage = img; plugin.crop();
       await new Promise(r => setTimeout(r, 350));
@@ -142,7 +142,7 @@ async function main() {
     // crop, screenshot a box around the SE corner handle, require a chunk of accent pixels; a
     // clipped/invisible handle (containment eating it) = FAIL — same visibility bar as the resize handle (D8).
     const cropVis = await cdp.evaluate(`(async () => {
-      const plugin = app.plugins.plugins["live-image-editor-peng"];
+      const plugin = app.plugins.plugins["live-image-editor"];
       const wrap = window.__chromeBig; const img = wrap.querySelector("img");
       plugin.activeImage = img; plugin.crop();
       await new Promise(r => setTimeout(r, 400));
@@ -157,7 +157,7 @@ async function main() {
       const shot = await cdp.screenshot({ x: r.x - 5, y: r.y - 5, width: r.w + 10, height: r.h + 10 });
       cropHandleVisible = accentFraction(shot, accentI, 100) > 0.12;
     }
-    await cdp.evaluate(`(async () => { const p = app.plugins.plugins["live-image-editor-peng"]; if (p.closeCrop) p.closeCrop(); await new Promise(r => setTimeout(r, 150)); })()`);
+    await cdp.evaluate(`(async () => { const p = app.plugins.plugins["live-image-editor"]; if (p.closeCrop) p.closeCrop(); await new Promise(r => setTimeout(r, 150)); })()`);
 
     // (6) tiny image → the toolbar floats ABOVE it (D1.1)
     let tinyFloat = { floating: false, above: false };
@@ -193,7 +193,7 @@ async function main() {
   } finally {
     if (setupDone) {
       await cdp.evaluate(`(async () => {
-        try { const p = app.plugins.plugins["live-image-editor-peng"]; if (p) { if (p.closeCrop) p.closeCrop(); if (p.toggleFilters && document.querySelector(".lie-submenu")) p.toggleFilters(); } } catch (e) {}
+        try { const p = app.plugins.plugins["live-image-editor"]; if (p) { if (p.closeCrop) p.closeCrop(); if (p.toggleFilters && document.querySelector(".lie-submenu")) p.toggleFilters(); } } catch (e) {}
         try { const f = app.vault.getAbstractFileByPath(${JSON.stringify(FIXTURE)}); if (f) await app.vault.delete(f); } catch (e) {}
         try { delete window.__chromeBig; delete window.__chromeSmall; } catch (e) {}
       })()`).catch(() => {});

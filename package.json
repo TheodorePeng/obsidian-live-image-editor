@@ -1,11 +1,11 @@
 {
-  "name": "obsidian-live-image-editor-peng",
+  "name": "obsidian-live-image-editor",
   "version": "0.6.17",
   "description": "Non-destructive image editing for Obsidian",
   "main": "main.js",
   "scripts": {
     "dev": "node esbuild.config.mjs",
-    "dev:vault": "OBSIDIAN_PLUGIN_DIR=vault-peng/.obsidian/plugins/live-image-editor-peng node esbuild.config.mjs",
+    "dev:vault": "OBSIDIAN_PLUGIN_DIR=vault-peng/.obsidian/plugins/live-image-editor node esbuild.config.mjs",
     "check:watch": "tsc -noEmit --watch --preserveWatchOutput",
     "build": "tsc -noEmit && node esbuild.config.mjs production",
     "build:dev": "node esbuild.config.mjs dev",

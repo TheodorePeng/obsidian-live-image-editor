@@ -39,7 +39,7 @@ async function main() {
   let setupDone = false;
   try {
     const setup = await cdp.evaluate(`(async () => {
-      const plugin = app.plugins.plugins["live-image-editor-peng"];
+      const plugin = app.plugins.plugins["live-image-editor"];
       if (!plugin) return { fatal: "plugin not loaded" };
       const vault = app.vault;
       const content = ["# Submodal region fixture", "", "plain", "![](images/sample-landscape.png){width=300}", ""].join("\\n");
@@ -66,7 +66,7 @@ async function main() {
     await cdp.hover(I.x + I.w / 2, I.y + I.h / 2);
     await sleep(200);
     const open = await cdp.evaluate(`(async () => {
-      const plugin = app.plugins.plugins["live-image-editor-peng"];
+      const plugin = app.plugins.plugins["live-image-editor"];
       plugin.activeImage = window.__srImg;
       plugin.toggleFilters();
       await new Promise(r => setTimeout(r, 350));
@@ -141,7 +141,7 @@ async function main() {
   } finally {
     if (setupDone) {
       await cdp.evaluate(`(async () => {
-        try { const p = app.plugins.plugins["live-image-editor-peng"]; if (p && document.querySelector(".lie-submenu")) p.toggleFilters(); } catch (e) {}
+        try { const p = app.plugins.plugins["live-image-editor"]; if (p && document.querySelector(".lie-submenu")) p.toggleFilters(); } catch (e) {}
         try { const f = app.vault.getAbstractFileByPath(${JSON.stringify(FIXTURE)}); if (f) await app.vault.delete(f); } catch (e) {}
         try { delete window.__srImg; delete window.__srRegion; delete window.__srPanel; delete window.__srToolbar; } catch (e) {}
       })()`).catch(() => {});

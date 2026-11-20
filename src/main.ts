@@ -131,7 +131,7 @@ export default class LiveImageEditorPlugin extends Plugin {
       // submenu (old class-*/toggle-inline entries) un-migrated until the next clean reload (observed
       // live). Isolate the scan; then self-heal / migrate the submenu once both plugins are up (no-op
       // when off).
-      try { await this.refreshSnippets(); } catch (e) { console.error("[live-image-editor-peng] snippet scan failed", e); }
+      try { await this.refreshSnippets(); } catch (e) { console.error("[live-image-editor] snippet scan failed", e); }
       await ensureEditingToolbarButtons(this.app, this.settings.editingToolbarEnabled);
     });
 

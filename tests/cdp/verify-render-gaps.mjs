@@ -29,7 +29,7 @@ const EVAL_RUN = `(async () => {
   window.__RG = "";
   const R = {};
   try {
-    const plugin = app.plugins.plugins["live-image-editor-peng"];
+    const plugin = app.plugins.plugins["live-image-editor"];
     if (!plugin) { window.__RG = JSON.stringify({ fatal: "plugin not loaded" }); return; }
     const vault = app.vault;
     const sleep = (ms) => new Promise((r) => setTimeout(r, ms));

@@ -6,7 +6,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { connectOptical } from "./_optical.mjs";
 
-const PLUGIN_ID = "live-image-editor-peng";
+const PLUGIN_ID = "live-image-editor";
 const FIXTURE = "_postprocessor-write-address-fixture.md";
 const ASSET_DIR_A = "_postprocessor-write-address-a";
 const ASSET_DIR_B = "_postprocessor-write-address-b";

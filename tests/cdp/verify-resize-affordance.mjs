@@ -63,7 +63,7 @@ async function main() {
   try {
     // ---- setup: create + open the fixture in LP, locate the image, capture geometry ----
     const setup = await cdp.evaluate(`(async () => {
-      const plugin = app.plugins.plugins["live-image-editor-peng"];
+      const plugin = app.plugins.plugins["live-image-editor"];
       if (!plugin) return { fatal: "plugin not loaded" };
       // the caption case (1c) needs captions ON; force it for the render (restored in finally)
       plugin.settings.showCaptions = true;
@@ -200,7 +200,7 @@ async function main() {
 
     // ---- crop ----
     const crop = await cdp.evaluate(`(async () => {
-      const plugin = app.plugins.plugins["live-image-editor-peng"];
+      const plugin = app.plugins.plugins["live-image-editor"];
       const img = document.querySelector(".lie-image-area img");
       if (!img) return { fatal: "image vanished before crop" };
       img.scrollIntoView({ block: "center" });           // the 1b/1c checks scrolled down; bring it back
@@ -263,7 +263,7 @@ async function main() {
     }
 
     await cdp.evaluate(`(async () => {
-      const plugin = app.plugins.plugins["live-image-editor-peng"];
+      const plugin = app.plugins.plugins["live-image-editor"];
       if (plugin.closeCrop) plugin.closeCrop();
       await new Promise(r => setTimeout(r, 150));
     })()`);
@@ -297,7 +297,7 @@ async function main() {
   } finally {
     if (setupDone) {
       await cdp.evaluate(`(async () => {
-        try { const p = app.plugins.plugins["live-image-editor-peng"]; if (p) p.settings.showCaptions = false; } catch (e) {}
+        try { const p = app.plugins.plugins["live-image-editor"]; if (p) p.settings.showCaptions = false; } catch (e) {}
         try { const f = app.vault.getAbstractFileByPath(${JSON.stringify(FIXTURE)}); if (f) await app.vault.delete(f); } catch (e) {}
       })()`).catch(() => {});
     }

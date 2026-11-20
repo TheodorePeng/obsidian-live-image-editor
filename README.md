@@ -1,11 +1,12 @@
-# Live Image Editor Peng
+# Live Image Editor
 
 > **Personal fork.** This is [TheodorePeng](https://github.com/TheodorePeng)'s maintenance fork of
-> [Britz/obsidian-live-image-editor](https://github.com/Britz/obsidian-live-image-editor), based on
-> upstream **v0.6.17**. The plugin is renamed — **Live Image Editor Peng**, plugin id
-> `live-image-editor-peng` — so it can be installed alongside the original without either one
-> overwriting the other. The original author, the MIT license and its copyright notice are unchanged.
-> See [`FORK.md`](FORK.md) for exactly what this fork changes, and how it syncs with upstream.
+> [Britz/obsidian-live-image-editor](https://github.com/Britz/obsidian-live-image-editor), tracking
+> upstream **v0.6.17**. The plugin identity is deliberately left **unchanged** — same display name,
+> same plugin id `live-image-editor`, same author credit — so this build is a drop-in replacement for
+> the upstream plugin. The flip side: it **cannot be installed alongside** the upstream plugin in one
+> vault, since both claim the same `.obsidian/plugins/live-image-editor/` folder. The MIT license and
+> the upstream copyright notice are untouched. See [`FORK.md`](FORK.md) for what this fork does change.
 
 Non-destructive image editing for Obsidian. Crop, rotate, flip, resize, and apply CSS filters — all live, without modifying the original file.
 
@@ -49,19 +50,19 @@ feature on synthetic, committable images (corner labels **A/B/C/D** + a **TOP** 
 rotate/flip obvious). To try it:
 
 1. In Obsidian, **Open folder as vault** → pick the `vault-image-toolbar/` directory.
-2. Enable **Live Image Editor Peng** in *Settings → Community plugins* (install it first if needed —
+2. Enable **Live Image Editor** in *Settings → Community plugins* (install it first if needed —
    see [Installation](#installation)).
 3. Open **`00 — Start here`** and work through the numbered pages (Rotate & flip, Crop, Size,
    Filters, Layout, Captions, Classes). Hover an image to reveal the toolbar and edit away.
 
-Two features ship opt-in — turn them on from *Settings → Live Image Editor Peng*: **Show image captions**
+Two features ship opt-in — turn them on from *Settings → Live Image Editor*: **Show image captions**
 and **Install example snippets** (the latter is already installed and enabled in this vault).
 
 ## Documentation
 
-📖 The **[documentation site](https://britz.github.io/obsidian-live-image-editor/)** belongs to the
-upstream project and describes the same feature set. This fork publishes no docs site of its own
-(its GitHub Actions are disabled on purpose, so nothing is deployed); the sources below build locally.
+📖 **[Documentation site](https://britz.github.io/obsidian-live-image-editor/)** — the user guide,
+the demo vault (with images rendered *live* by the plugin's runtime) and the design docs, published
+from `docs/` via ProperDocs + MaterialX (the maintained MkDocs / Material forks).
 
 - **[User guide](docs/user-guide.md)** — how to use every feature, with screenshots.
 - **[`vault-image-toolbar/`](vault-image-toolbar/)** — a demo vault that shows each feature on real images
@@ -72,22 +73,15 @@ upstream project and describes the same feature set. This fork publishes no docs
 
 ## Installation
 
-> This fork is **not** published in Obsidian's community plugin directory — that listing belongs to
-> the upstream project: <https://community.obsidian.md/plugins/live-image-editor>. Install the original
-> from there if you want the upstream plugin; install this fork from its own releases as described below.
+**From the community directory (recommended).** Live Image Editor is published in Obsidian's
+community plugin directory: **<https://community.obsidian.md/plugins/live-image-editor>**. In Obsidian,
+open *Settings → Community plugins → Browse*, search for **Live Image Editor**, install and enable it.
 
 **Manual install.**
 
-1. Download `main.js`, `manifest.json` and `styles.css` from this fork's
-   [Releases](https://github.com/TheodorePeng/obsidian-live-image-editor-peng/releases)
-2. Put them in your vault's `.obsidian/plugins/live-image-editor-peng/` directory
-3. Enable **Live Image Editor Peng** in Settings > Community Plugins
-
-The plugin id is `live-image-editor-peng`, so its folder name must match — a folder named
-`live-image-editor/` belongs to the upstream plugin and will not load this build.
-
-**From source.** `npm ci && npm run build`, then `bash scripts/dev-install.sh <vault>` (see
-[Development docs](docs/development/README.md)).
+1. Download the latest release from [Releases](https://github.com/Britz/obsidian-live-image-editor/releases)
+2. Extract into your vault's `.obsidian/plugins/live-image-editor/` directory
+3. Enable the plugin in Settings > Community Plugins
 
 ## Development & Release compliance
 
@@ -95,7 +89,7 @@ Building the plugin from source, the watch / dev-install loop, live debugging in
 previewing the docs site locally are all covered in the
 **[Development docs](docs/development/README.md)** — everything builds inside the devcontainer.
 
-**Release compliance.** The *upstream* plugin is **accepted into the community directory**
+**Release compliance.** The plugin is **accepted into the community directory**
 (<https://community.obsidian.md/plugins/live-image-editor>). Before each submission it is audited against
 Obsidian's **Developer policies**, **Plugin guidelines** and **Submission requirements**. All
 `R1–R30` rules are met — the former open items were closed in the v0.4.2 release-compliance pass. The

@@ -30,7 +30,7 @@ const EVAL_RUN = `(async () => {
   const R = {};
   const ok = (k, v) => { R[k] = v; };
   try {
-    const plugin = app.plugins.plugins["live-image-editor-peng"];
+    const plugin = app.plugins.plugins["live-image-editor"];
     if (!plugin) { window.__POPREGION = JSON.stringify({ fatal: "plugin not loaded" }); return; }
     const vault = app.vault;
     const PATH = "_popup-region-fixture.md";

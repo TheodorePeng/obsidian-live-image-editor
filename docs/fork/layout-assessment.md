@@ -28,9 +28,9 @@ Key order produced by the serializer: `.inline`, `.class…`, `align=`, `rotate=
 Native sizes (`![[img|300]]`) are **folded into the block** by `applyNativeSize()` / `foldNativeSize()`,
 never left in the pipe.
 
-**Consequence for this fork:** the format is independent of the plugin ID, which is why the rename is
-safe. It also means **the format is a compatibility contract** — do not change key names, ordering, or
-escaping while fixing layout.
+**Consequence for this fork:** the format is independent of the plugin ID, so it is untouched by
+anything the fork does to the plugin's identity — and it is a **compatibility contract**: do not change
+key names, ordering, or escaping while fixing layout.
 
 ## 2. How rendering works (two independent paths)
 

@@ -73,7 +73,7 @@ try {
   if (await cdp.evaluate("app.vault.getName()") !== "vault-image-toolbar") { console.log("FATAL: wrong vault"); process.exit(2); }
 
   const runtimeFingerprint = await cdp.evaluate(`(() => {
-    const p = app.plugins.plugins["live-image-editor-peng"];
+    const p = app.plugins.plugins["live-image-editor"];
     const source = (value) => typeof value === "function" ? Function.prototype.toString.call(value) : "";
     const strip = source(p?.stripBlockText);
     const pair = source(p?.pairLivePreviewBlock);
@@ -101,7 +101,7 @@ try {
   }
 
   orig = await cdp.evaluate(`(() => {
-    const p = app.plugins.plugins["live-image-editor-peng"];
+    const p = app.plugins.plugins["live-image-editor"];
     window.__thErrors = [];
     window.addEventListener("error", (e) => window.__thErrors.push(String(e.message)));
     window.addEventListener("unhandledrejection", (e) => window.__thErrors.push("rej:" + String(e.reason)));
@@ -110,8 +110,8 @@ try {
 
   // ---- shared drivers -------------------------------------------------------------------------
   const setLinkFormat = async (useMd) => { await cdp.evaluate(`app.vault.setConfig("useMarkdownLinks", ${useMd})`); };
-  const setReveal = async (m) => { await cdp.evaluate(`(() => { const p = app.plugins.plugins["live-image-editor-peng"]; p.settings.defaultRevealState = ${JSON.stringify(m)}; p.refreshLivePreviewDecorations(); })()`); await wait(300); };
-  const setCaptions = async (on) => { await cdp.evaluate(`(() => { const p = app.plugins.plugins["live-image-editor-peng"]; p.settings.showCaptions = ${on}; p.refreshLivePreviewDecorations(); })()`); await wait(300); };
+  const setReveal = async (m) => { await cdp.evaluate(`(() => { const p = app.plugins.plugins["live-image-editor"]; p.settings.defaultRevealState = ${JSON.stringify(m)}; p.refreshLivePreviewDecorations(); })()`); await wait(300); };
+  const setCaptions = async (on) => { await cdp.evaluate(`(() => { const p = app.plugins.plugins["live-image-editor"]; p.settings.showCaptions = ${on}; p.refreshLivePreviewDecorations(); })()`); await wait(300); };
   const readFixture = () => cdp.evaluate(`app.vault.adapter.read(${JSON.stringify(FIXTURE)})`);
   const readFixtureState = () => cdp.evaluate(`(async () => {
     const file = app.workspace.getActiveFile();
@@ -262,7 +262,7 @@ try {
     if (place === "solo") await scrollToLine(targetLine);
     else await scrollToTable();
     return cdp.evaluate(`(() => {
-      const p = app.plugins.plugins["live-image-editor-peng"];
+      const p = app.plugins.plugins["live-image-editor"];
       let img = null;
       if (${JSON.stringify(place)} === "solo") {
         const cm = app.workspace.activeEditor.editor.cm;
@@ -508,7 +508,7 @@ try {
     const cm = app.workspace.activeEditor?.editor?.cm; if (!cm) return " no-cm";
     const n = ${CAPTION_LINE.n} + 1;
     const wraps = [...document.querySelectorAll(".workspace-leaf.mod-active .cm-content .lie-wrapper")].map((w) => { let ln = -1; try { ln = cm.state.doc.lineAt(cm.posAtDOM(w)).number; } catch (e) {} return ln; });
-    const p = app.plugins.plugins["live-image-editor-peng"];
+    const p = app.plugins.plugins["live-image-editor"];
     const st = app.workspace.activeLeaf.getViewState();
     const srcVis = document.querySelector(".workspace-leaf.mod-active .markdown-source-view")?.offsetWidth > 0;
     return " line=" + JSON.stringify(cm.state.doc.line(n).text.slice(0, 45)) + " wrapLines=" + JSON.stringify(wraps) + " showCaptions=" + p.settings.showCaptions + " mode=" + st.state.mode + " srcVis=" + srcVis;
@@ -711,11 +711,11 @@ try {
       window.__thPassiveRef = app.workspace.on("editor-change", () => window.__thPassiveEdits++);
       return true;
     })()`);
-    const before = await cdp.evaluate(`app.plugins.plugins["live-image-editor-peng"].reconcileRunCount`);
+    const before = await cdp.evaluate(`app.plugins.plugins["live-image-editor"].reconcileRunCount`);
     const pt = await cdp.evaluate(`(() => { const t = [...document.querySelectorAll(${JSON.stringify(TABLE_SEL)})].find((x) => x.offsetWidth > 0); const img = t && [...t.querySelectorAll("img")].find((i) => i.offsetWidth > 0); if (!img) return null; const r = img.getBoundingClientRect(); return { x: r.x + r.width / 2, y: r.y + r.height / 2 }; })()`);
     if (pt) { await cdp.hover(pt.x, pt.y); await wait(800); await cdp.hover(pt.x + 10, pt.y + 5); await wait(800); }
     const toolbarUp = await cdp.evaluate(`!!document.querySelector(".lie-toolbar-floating, .lie-toolbar-in-image")`);
-    const after = await cdp.evaluate(`app.plugins.plugins["live-image-editor-peng"].reconcileRunCount`);
+    const after = await cdp.evaluate(`app.plugins.plugins["live-image-editor"].reconcileRunCount`);
     const passiveEdits = await cdp.evaluate("window.__thPassiveEdits");
     const sourceAfterHover = await readFixture();
     rec(`hover/toolbar (toolbar=${toolbarUp}) triggers ZERO reconcile runs (F27)`, after === before, `(${before}→${after})`);
@@ -723,9 +723,9 @@ try {
     rec("settle + real hover leave note source byte-identical", sourceAfterHover === sourceBeforePassive);
     await cdp.hover(4, 4);
     await wait(1500);
-    const idle1 = await cdp.evaluate(`app.plugins.plugins["live-image-editor-peng"].reconcileRunCount`);
+    const idle1 = await cdp.evaluate(`app.plugins.plugins["live-image-editor"].reconcileRunCount`);
     await wait(1500);
-    const idle2 = await cdp.evaluate(`app.plugins.plugins["live-image-editor-peng"].reconcileRunCount`);
+    const idle2 = await cdp.evaluate(`app.plugins.plugins["live-image-editor"].reconcileRunCount`);
     rec("the reconcile counter SETTLES when idle (no standing automatism)", idle2 === idle1, `(${idle1}→${idle2})`);
     const sourceAfterIdle = await readFixture();
     const passiveEditsAfterIdle = await cdp.evaluate("window.__thPassiveEdits");
@@ -743,7 +743,7 @@ try {
 } finally {
   try {
     await cdp.evaluate(`(async () => {
-      const p = app.plugins.plugins["live-image-editor-peng"];
+      const p = app.plugins.plugins["live-image-editor"];
       if (window.__thEditsRef) app.workspace.offref(window.__thEditsRef);
       if (window.__thPassiveRef) app.workspace.offref(window.__thPassiveRef);
       if (window.__thDispatchGuard) {
