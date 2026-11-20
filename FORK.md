@@ -18,7 +18,7 @@ cadence — see [`docs/fork/layout-assessment.md`](docs/fork/layout-assessment.m
 
 | Layer | Value |
 |---|---|
-| GitHub repository | `TheodorePeng/obsidian-live-image-editor-peng` (the fork's own name) |
+| GitHub repository | `TheodorePeng/obsidian-live-image-editor` (the fork's own name) |
 | Plugin ID | `live-image-editor` — **same as upstream** |
 | Plugin display name | `Live Image Editor` — **same as upstream** |
 | Author / authorUrl | `britz` / `https://github.com/Britz` — **same as upstream** |
@@ -60,7 +60,7 @@ an edited note.
 ## 2. Remotes and branches
 
 ```
-origin    https://github.com/TheodorePeng/obsidian-live-image-editor-peng.git   (fetch + push)
+origin    https://github.com/TheodorePeng/obsidian-live-image-editor.git   (fetch + push)
 upstream  https://github.com/Britz/obsidian-live-image-editor.git              (fetch only)
 upstream  push URL is set to `no_push_this_remote_is_read_only`                (guard)
 ```
@@ -70,9 +70,9 @@ upstream  push URL is set to `no_push_this_remote_is_read_only`                (
 | `main` | **Pure mirror of `upstream/main`. Never commit here.** |
 | `personal` | All fork work. This is the repository's default branch. |
 
-The local checkout folder is `obsidian-live-image-editor/` while the GitHub repository is
-`obsidian-live-image-editor-peng` — a folder name is local, a repository name is public; they are
-allowed to differ.
+The local checkout folder and the GitHub repository now share the same name,
+`obsidian-live-image-editor`. The fork is still a fork: GitHub keeps the fork relationship to
+`Britz/obsidian-live-image-editor`, so `upstream` and the PR/merge network are unaffected by the rename.
 
 ---
 
