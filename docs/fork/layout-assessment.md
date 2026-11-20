@@ -168,9 +168,10 @@ reached users. Any list regression must be a CDP test.
 - `tests/unit/live-preview.test.ts` — already covers `rewriteWidth` / `inlineEmbeds`.
 - `tests/unit/render-core.test.ts` — already asserts `RENDER_CSS` identity with `styles.css`.
 
-**Vault gap:** `vault-image-toolbar/` has `08 — Tables.md` but **no list note**. Add
-`09 — Lists & nesting.md` to `vault-peng/` as the manual repro page (and consider mirroring it upstream
-later).
+**Vault gap:** `vault-image-toolbar/` has `08 — Tables.md` but **no list note**. Added
+`vault-peng/09 — Lists & nesting.md` locally (gitignored) with seven cases: image-only item, image
+mid-sentence, nested list, ordered list, cropped image in a list, block image in a list, and a
+plain-paragraph control block. Consider mirroring it upstream later.
 
 ---
 
